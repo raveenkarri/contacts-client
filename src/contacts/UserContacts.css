@@ -1,0 +1,95 @@
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+.contact-form{
+ margin-left: 2%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px; 
+}
+.contact-form input{
+width: 90%;
+  padding: 10px;
+  margin: 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.submit-container{
+  font-size: 20px;
+  color:white;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px;
+  width: 95%;
+    border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #575dfe;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+.logout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fe5757;
+  text-decoration: none;
+  color: #131111;
+  width: 25%;
+  padding: 10px;
+  margin-left: 35%;
+  border-radius: 10px;
+}
+.logout-container:hover{
+  background-color:red;
+}
+.heading-contactForm{
+  display: flex;
+  
+}
+.heading{
+  font-size: large;
+  margin-left: 5%;
+  margin-right: 0%;
+  width: auto;
+  
+}
+.button-container{
+  display: flex;
+  gap: 10px;
+
+}
+.edit-button{
+  border-radius: 10px;
+  width: 20%;
+  background-color: #575dfe;
+  color:white;
+  font-size: large;
+}
+.delete-button{
+  border-radius: 10px;
+  width: 20%;
+  padding-right: 20px;
+  background-color: #e42222;
+  color:white;
+  font-size: large;
+}
