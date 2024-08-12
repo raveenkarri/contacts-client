@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 // Set default configurations for axios
 
-axios.defaults.baseURL = "https://contacts-api-dhfb.onrender.com";
+axios.defaults.baseURL = "https://contacts-api-dhfb.onrender.com/api/users";
 
 export const stateContext = createContext();
 
