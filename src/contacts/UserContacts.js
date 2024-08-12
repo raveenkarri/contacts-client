@@ -37,7 +37,7 @@ const UserContacts = () => {
     try {
       const res = await fetchContacts(token);
       setUserData(res.contacts);
-      setUser(res.user.username);
+      setUser(res.username);
     } catch (err) {
       console.error("Error fetching contacts:", err);
     }
