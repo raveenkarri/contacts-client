@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./UserContacts.css";
-import Cookies from "js-cookie";
+
 import { stateContext } from "..";
 
 import {
@@ -116,9 +116,9 @@ const UserContacts = () => {
   };
   const logoutHandler = async () => {
     try {
-      Cookies.remove("token");
       setToken("");
       alert("Logout successfull");
+      navigate("/");
     } catch (error) {
       alert("Can't logout");
       navigate("/");
