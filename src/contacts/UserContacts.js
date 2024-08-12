@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./UserContacts.css";
 
 import { stateContext } from "..";
-import Cookies from "js-cookie";
+
 import {
   fetchContacts,
   createContacts,
@@ -18,7 +18,7 @@ const UserContacts = () => {
     contactEmail: "",
     phone: "",
   });
-  const { token } = useContext(stateContext);
+  const { token, setToken } = useContext(stateContext);
   const [userData, setUserData] = useState([]);
   const [user, setUser] = useState("");
 
@@ -116,7 +116,7 @@ const UserContacts = () => {
   };
   const logoutHandler = async () => {
     try {
-      Cookies.remove("token");
+      setToken("");
       alert("Logout successfull");
       navigate("/");
     } catch (error) {

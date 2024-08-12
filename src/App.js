@@ -5,12 +5,13 @@ import Register from "./register/Register";
 import UserContacts from "./contacts/UserContacts";
 import ErrorPage from "./ErrorPage";
 import { stateContext } from ".";
+import Cookies from "js-cookie";
 const ProtectedRoute = ({ children }) => {
   const { token } = useContext(stateContext);
   return token ? children : <ErrorPage />;
 };
 const App = () => {
-  const { token } = useContext(stateContext);
+  const token = Cookies.get("token");
   return (
     <div>
       <Routes>
