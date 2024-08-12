@@ -18,7 +18,9 @@ export const StateProvider = ({ children }) => {
   const [token, setToken] = useState("");
   useEffect(() => {
     if (token) {
-      return Cookies.set("token", token);
+      Cookies.set("token", token);
+    } else {
+      Cookies.remove("token");
     }
   }, [token]);
   return (
