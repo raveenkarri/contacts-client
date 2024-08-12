@@ -36,6 +36,7 @@ const UserContacts = () => {
   const getContacts = async () => {
     try {
       const res = await fetchContacts(token);
+      console.log(res);
       setUserData(res.contacts);
       setUser(res.username);
     } catch (err) {
