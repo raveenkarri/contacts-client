@@ -119,7 +119,6 @@ const UserContacts = () => {
       Cookies.remove("token");
       setToken("");
       alert("Logout successfull");
-      navigate("/");
     } catch (error) {
       alert("Can't logout");
       navigate("/");
