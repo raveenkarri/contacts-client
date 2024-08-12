@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -7,8 +7,9 @@ import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 
 // Set default configurations for axios
-axios.defaults.withCredentials = true;
+
 axios.defaults.baseURL = "https://contacts-api-dhfb.onrender.com";
+
 export const stateContext = createContext();
 
 // StateProvider component

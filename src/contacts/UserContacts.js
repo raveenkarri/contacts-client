@@ -9,7 +9,6 @@ import {
   createContacts,
   modifyContacts,
   removeContacts,
-  fetchLogout,
 } from "./ContactFunctions";
 
 const UserContacts = () => {
@@ -114,15 +113,12 @@ const UserContacts = () => {
   };
   const logoutHandler = async () => {
     try {
-      const res = await fetchLogout(token);
-
       Cookies.remove("token");
-      alert(res.message);
+      alert("Logout successfull");
       navigate("/");
     } catch (error) {
-      if (error) {
-        console.log(error.response.data.message);
-      }
+      alert("Can't logout");
+      navigate("/");
     }
   };
 

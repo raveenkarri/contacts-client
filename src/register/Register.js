@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import "./Register.css"; // Import the CSS file
+import "./Register.css";
 import { fetchRegister } from "../contacts/ContactFunctions";
 
 const Register = () => {

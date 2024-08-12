@@ -42,7 +42,3 @@ export const modifyContacts = async (contactId, token, contact) => {
 export const removeContacts = async (contactId, token) => {
   return await axiosRequest("delete", `/delete/${contactId}`, token);
 };
-
-export const fetchLogout = async (token) => {
-  return await axiosRequest("post", "/logout", token);
-};

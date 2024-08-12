@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { fetchLogin } from "../contacts/ContactFunctions";
 
-import "./Login.css"; // Import the CSS file
+import "./Login.css";
 import { stateContext } from "..";
 
 const Login = () => {
