@@ -20,6 +20,7 @@ const UserContacts = () => {
   });
   const { token } = useContext(stateContext);
   const [userData, setUserData] = useState([]);
+  const [user, setUser] = useState("");
 
   const [editContactId, setEditContactId] = useState(null);
 
@@ -36,6 +37,7 @@ const UserContacts = () => {
     try {
       const res = await fetchContacts(token);
       setUserData(res.contacts);
+      setUser(res.user.username);
     } catch (err) {
       console.error("Error fetching contacts:", err);
     }
@@ -130,6 +132,7 @@ const UserContacts = () => {
           <h1>
             Hi
             <br />
+            {user},
             <br />
             Add Your contacts,
           </h1>
