@@ -10,10 +10,11 @@ const ProtectedRoute = ({ children }) => {
   return token ? children : <ErrorPage />;
 };
 const App = () => {
+  const { token } = useContext(stateContext);
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={token ? <UserContacts /> : <Login />} />
         <Route path="/register" element={<Register />} />
         <Route
           path="/contacts"
