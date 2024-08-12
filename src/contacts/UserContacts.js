@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./UserContacts.css";
-import axios from "axios";
+
+import { stateContext } from "..";
 import Cookies from "js-cookie";
-axios.defaults.withCredentials = true;
+import {
+  fetchContacts,
+  createContacts,
+  modifyContacts,
+  removeContacts,
+  fetchLogout,
+} from "./ContactFunctions";
 
 const UserContacts = () => {
+  const navigate = useNavigate();
   const [contact, setContact] = useState({
     name: "",
     contactEmail: "",
     phone: "",
   });
-
+  const { token } = useContext(stateContext);
   const [userData, setUserData] = useState([]);
 
   const [editContactId, setEditContactId] = useState(null);
@@ -19,8 +27,7 @@ const UserContacts = () => {
   useEffect(() => {
     getContacts();
   }, []);
-  const token = Cookies.get("token");
-  console.log(token);
+
   const contactHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
@@ -28,11 +35,8 @@ const UserContacts = () => {
   // Get contacts of logged-in user
   const getContacts = async () => {
     try {
-      const res = await axios.get("/userContacts", {
-        withCredentials: true,
-      });
-      console.log(res.data.contacts);
-      setUserData(res.data.contacts);
+      const res = await fetchContacts(token);
+      setUserData(res.contacts);
     } catch (err) {
       console.error("Error fetching contacts:", err);
     }
@@ -57,7 +61,7 @@ const UserContacts = () => {
   // Add new contact
   const addContact = async () => {
     try {
-      await axios.post("/create", { contacts: [contact] });
+      await createContacts(token, contact);
       alert("Contact submitted successfully!!");
       getContacts();
       resetForm();
@@ -71,7 +75,7 @@ const UserContacts = () => {
   // Update existing contact
   const updateContact = async (contactId) => {
     try {
-      await axios.put(`/update/${contactId}`, { contacts: [contact] });
+      await modifyContacts(contactId, token, contact);
       alert("Contact updated successfully!!");
       getContacts();
       resetForm();
@@ -85,7 +89,7 @@ const UserContacts = () => {
   // Delete contact
   const handleDeleteContact = async (contactId) => {
     try {
-      await axios.delete(`/delete/${contactId}`);
+      await removeContacts(contactId, token);
       alert("Contact deleted successfully!!");
       getContacts();
     } catch (Error) {
@@ -108,7 +112,19 @@ const UserContacts = () => {
     setContact({ name: "", contactEmail: "", phone: "" });
     setEditContactId(null);
   };
-  const logoutHandler = () => {};
+  const logoutHandler = async () => {
+    try {
+      const res = await fetchLogout(token);
+
+      Cookies.remove("token");
+      alert(res.message);
+      navigate("/");
+    } catch (error) {
+      if (error) {
+        console.log(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <div>

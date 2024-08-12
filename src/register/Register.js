@@ -1,34 +1,34 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
 import "./Register.css"; // Import the CSS file
+import { fetchRegister } from "../contacts/ContactFunctions";
 
 const Register = () => {
   const navigate = useNavigate();
 
-  const [data, setData] = useState({
+  const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
   const changeHandler = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/register", data);
+      const response = await fetchRegister(formData);
 
-      alert("Registered Successfully!!");
+      alert(response.message);
       navigate("/");
     } catch (error) {
-      console.error(error);
+      alert(error.response.data.message);
       // Handle error
     }
-    setData({
+    setFormData({
       username: "",
       email: "",
       password: "",
@@ -47,7 +47,7 @@ const Register = () => {
           type="text"
           name="username"
           placeholder="Enter username"
-          value={data.username}
+          value={formData.username}
           onChange={changeHandler}
         />
         <br />
@@ -55,7 +55,7 @@ const Register = () => {
           type="email"
           name="email"
           placeholder="Enter email"
-          value={data.email}
+          value={formData.email}
           onChange={changeHandler}
         />
         <br />
@@ -64,7 +64,7 @@ const Register = () => {
             type="password"
             name="password"
             placeholder="Enter password"
-            value={data.password}
+            value={formData.password}
             onChange={changeHandler}
           />
         </div>

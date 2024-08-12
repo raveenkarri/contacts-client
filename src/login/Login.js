@@ -1,28 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import axios from "axios";
+import Cookies from "js-cookie";
+import { fetchLogin } from "../contacts/ContactFunctions";
 
 import "./Login.css"; // Import the CSS file
-axios.defaults.withCredentials = true;
+import { stateContext } from "..";
+
 const Login = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { setToken } = useContext(stateContext);
   const [loading, setLoading] = useState(false); // Loading state
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true); // Set loading to true when submitting
     try {
-      const res = await axios.post("/login", {
-        email,
-        password,
-      });
-      navigate("/contacts");
+      const res = await fetchLogin(formData);
 
-      console.log(res.data);
+      navigate("/contacts");
+      setToken(Cookies.get("token"));
+      alert(res.message);
     } catch (err) {
       if (err.response) {
         alert(err.response.data.message);
@@ -48,17 +54,19 @@ const Login = () => {
                 className="login-form-input"
                 type="email"
                 placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
               />
               <br />
               <div className="password-container">
                 <input
                   className="login-form-input"
                   type="password"
-                  value={password}
                   placeholder="Enter password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
               </div>
               <br />
