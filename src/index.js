@@ -8,9 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 // Set default configurations for axios
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:8000/api/users";
-
-// Create the context
+axios.defaults.baseURL = "https://contacts-api-dhfb.onrender.com";
 export const stateContext = createContext();
 
 // StateProvider component
