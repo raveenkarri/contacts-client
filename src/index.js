@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import { BrowserRouter } from "react-router-dom";
 
@@ -15,7 +16,11 @@ export const stateContext = createContext();
 // StateProvider component
 export const StateProvider = ({ children }) => {
   const [token, setToken] = useState("");
-
+  useEffect(() => {
+    if (token) {
+      return Cookies.set("token", token);
+    }
+  }, [token]);
   return (
     <stateContext.Provider value={{ token, setToken }}>
       {children}

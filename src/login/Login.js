@@ -27,7 +27,7 @@ const Login = () => {
       const res = await fetchLogin(formData);
 
       navigate("/contacts");
-      setToken(Cookies.get("token"));
+      setToken(res.accessToken);
       alert(res.message);
     } catch (err) {
       if (err.response) {
